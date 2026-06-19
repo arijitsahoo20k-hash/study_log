@@ -1,0 +1,135 @@
+.contact-sheet {
+  background: var(--ink-900);
+  border: 1px solid var(--ink-700);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.contact-sheet__sprockets {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 14px;
+  background: var(--ink-950);
+}
+
+.contact-sheet__sprockets span {
+  width: 6px;
+  height: 6px;
+  border-radius: 1px;
+  background: var(--ink-700);
+}
+
+.contact-sheet__strip {
+  display: flex;
+  gap: 4px;
+  padding: 10px 8px;
+  overflow-x: auto;
+  scroll-snap-type: x proximate;
+}
+
+.contact-sheet__strip::-webkit-scrollbar {
+  height: 6px;
+}
+
+.frame {
+  flex: 0 0 auto;
+  width: 64px;
+  height: 64px;
+  border-radius: 3px;
+  border: none;
+  background: var(--ink-800);
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+  scroll-snap-align: start;
+  transition: transform 0.15s var(--ease-out);
+}
+
+.frame:hover {
+  transform: translateY(-3px);
+  z-index: 2;
+}
+
+.frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.frame--filled {
+  box-shadow: inset 0 0 0 2px var(--focus-tint, var(--amber-500));
+}
+
+.frame--filled::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, color-mix(in srgb, var(--focus-tint, var(--amber-500)) 35%, transparent), transparent 55%);
+  pointer-events: none;
+}
+
+.frame--empty {
+  background:
+    repeating-linear-gradient(135deg, var(--ink-700) 0, var(--ink-700) 1px, transparent 1px, transparent 7px);
+  opacity: 0.5;
+}
+
+.frame--today {
+  background: var(--ink-800);
+  box-shadow: inset 0 0 0 2px var(--ink-600);
+  animation: pulseToday 2.4s ease-in-out infinite;
+}
+
+@keyframes pulseToday {
+  0%, 100% { box-shadow: inset 0 0 0 2px var(--ink-600); }
+  50% { box-shadow: inset 0 0 0 2px var(--amber-700); }
+}
+
+.frame--frozen {
+  background: linear-gradient(135deg, var(--ink-700), var(--ink-800));
+}
+
+.frame__freeze {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--sage-400);
+  font-size: 1.1rem;
+  opacity: 0.7;
+}
+
+.frame__empty {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.frame__daylabel {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  text-align: center;
+  color: var(--paper-100);
+  background: rgba(17, 19, 26, 0.72);
+  padding: 2px 0;
+  letter-spacing: 0.02em;
+}
+
+.frame--empty .frame__daylabel,
+.frame--frozen .frame__daylabel {
+  color: var(--paper-muted);
+}
+
+@media (max-width: 480px) {
+  .frame {
+    width: 52px;
+    height: 52px;
+  }
+}
